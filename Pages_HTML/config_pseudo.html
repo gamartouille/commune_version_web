@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>Titre de la page</title>
-  <script src="../index.js" defer></script>
+  <script src="../JS_par_page/config_pseudo.js" defer></script>
 </head>
 <body>
   <p id="texteConfigPseudo">Mais, avant tout, comment t'appelle-tu ?</p>
-  <button id="btnSuivant">Suivant</button>
-  <form id="pseudo"></form>
+  <form id="pseudoForm">
+    <input type="text" name="pseudo" placeholder="Votre pseudo" required />
+  </form>
+  <button type = submit id="btnSuivant" onclick="window.location.href='config_personnage.html'">Suivant</button>
 </body>
 </html>

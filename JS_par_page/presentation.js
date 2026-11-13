@@ -1,7 +1,6 @@
 let lines = [];
 let index = 0;
 let path_texte_presentation = "../Data/texte_presentation.txt"
-let path_text_questions = "../Data/questions_presentation.txt"
 
 async function chargerTexte(path_texte) {
     const reponse = await fetch(path_texte);
@@ -13,14 +12,17 @@ async function chargerTexte(path_texte) {
 
     const texte = await reponse.text();
     lines = texte.split(/\r?\n/);
+    while (lines.length > 0 && lines[lines.length - 1].trim() === "") {
+        lines.pop();
+    }
     console.log(lines.length);
 }
 
 function ligneSuivante() {
     if (index >= lines.length) {
-        console.log("fin du texte")
+        window.location.href = "config_pseudo.html";
+        return;
     }
-    console.log(lines[index]);
     document.getElementById('textePresentation').textContent = lines[index];
     index++;
 }

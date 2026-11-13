@@ -1,14 +1,21 @@
-let path_texte_config_pseudo = "../Data/texte_config_pseudo.txt"
+const pseudoForm = document.getElementById('pseudoForm');
 
-async function chargerTexte(path_texte) {
-    const reponse = await fetch(path_texte);
+  pseudoForm.addEventListener('submit', function(event) {
+    // 1. Empêcher le rechargement de la page
+    event.preventDefault();
 
-    if (!reponse.ok) {
-        console.error(`Erreur ${reponse.status} : impossible de charger ${path_texte}`);
-        return;
-    }
+    // 2. Récupérer les données du formulaire sous forme d'objet
+    const pseudo = new FormData(pseudoForm);
+    const donnees = Object.fromEntries(pseudo.entries());
 
-    const texte = await reponse.text();
-    lines = texte.split(/\r?\n/);
-    console.log(lines.length);
-}
+    // 3. Stocker dans le localStorage (conversion en texte JSON obligatoire)
+    localStorage.setItem('resultatFormulaire', JSON.stringify(donnees));
+
+    console.log('Pseudo sauvegardé :', donnees);
+  });
+
+  // 4. Pour récupérer les données plus tard (ex: au chargement de la page)
+  const donneesSauvegardees = JSON.parse(localStorage.getItem('resultatFormulaire'));
+  if (donneesSauvegardees) {
+    console.log('Pseudo récupéré : ', donneesSauvegardees);
+  }
