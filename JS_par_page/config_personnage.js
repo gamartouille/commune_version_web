@@ -1,20 +1,56 @@
+/*
 let path_gilet_jaune = "../Images/gilet_jaune.jpeg"
 let path_black_bloc = "../Images/black_bloc.jpeg"
 let path_syndicaliste = "../Images/syndicaliste.jpg"
 let path_journaliste = "../Images/journaliste_tf1.jpg"
+*/
 
-async function chargerTexte(path_texte) {
-    const reponse = await fetch(path_texte);
+const syndicalisteCheckbox = document.querySelector('syndicalisteCheckbox')
+const giletjauneCheckbox = document.querySelector('giletjauneCheckbox')
+const blackblocCheckbox = document.querySelector('blackblocCheckbox')
+const journalisteCheckbox = document.querySelector('journalisteCheckbox')
 
-    if (!reponse.ok) {
-        console.error(`Erreur ${reponse.status} : impossible de charger ${path_texte}`);
-        return;
+syndicalisteCheckbox.addEventListener('change', (event) => {
+    if (event.syndicalisteCheckbox.checked) {
+        event.preventDefault();
+        const perso = new FormData(syndicalisteCheckbox);
+        const donnees = Object.fromEntries(perso.entries());
+        localStorage.setItem('Perso', JSON.stringify(donnees));
+        console.log('Perso sauvegardé :', donnees);
     }
+})
 
-    const texte = await reponse.text();
-    lines = texte.split(/\r?\n/);
-    while (lines.length > 0 && lines[lines.length - 1].trim() === "") {
-        lines.pop();
+giletjauneCheckbox.addEventListener('change', (event) => {
+    if (event.giletjauneCheckbox.checked) {
+        event.preventDefault();
+        const perso = new FormData(giletjauneCheckbox);
+        const donnees = Object.fromEntries(perso.entries());
+        localStorage.setItem('Perso', JSON.stringify(donnees));
+        console.log('Perso sauvegardé :', donnees);
     }
-    console.log(lines.length);
+})
+
+blackblocCheckbox.addEventListener('change', (event) => {
+    if (event.blackblocCheckbox.checked) {
+        event.preventDefault();
+        const perso = new FormData(blackblocCheckbox);
+        const donnees = Object.fromEntries(perso.entries());
+        localStorage.setItem('Perso', JSON.stringify(donnees));
+        console.log('Perso sauvegardé :', donnees);
+    }
+})
+
+journalisteCheckbox.addEventListener('change', (event) => {
+    if (event.journalisteCheckbox.checked) {
+        event.preventDefault();
+        const perso = new FormData(journalisteCheckbox);
+        const donnees = Object.fromEntries(perso.entries());
+        localStorage.setItem('Perso', JSON.stringify(donnees));
+        console.log('Perso sauvegardé :', donnees);
+    }
+})
+
+const donneesSauvegardees = JSON.parse(localStorage.getItem('Perso'));
+if (donneesSauvegardees) {
+console.log('Perso récupéré : ', donneesSauvegardees);
 }
