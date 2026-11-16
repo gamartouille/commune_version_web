@@ -76,7 +76,7 @@ class Nourriture extends Objets{
 
     utiliser (personnage) {
         personnage.pts_de_vie += this.soin;
-        console.log(`${personnage.nom} recupère ${this.soin} points de vie`)
+        console.log(`${personnage.nom} recupère ${this.soin} points de vie`);
     }
 };
 
@@ -117,5 +117,37 @@ class Steak extends Nourriture {
 };
 
 class Booster extends Objets {
+    constructor (nom, popularite_bonus, image) {
+        super(nom, image)
+        this.popularite_bonus = popularite_bonus
+    }
 
+    utiliser (personnage) {
+        groupe = this.nom;
+        personnage.ajouter_popularite(groupe, this.popularite_bonus);
+    }
+};
+
+class Badge extends Booster {
+    constructor () {
+        super(nom="Badge CGT", popularite_bonus=5, image="../Images/badge.png")
+    }
+};
+
+class CarteDePresse extends Booster {
+    constructor () {
+        super(nom="Carte de presse", popularite_bonus=5, image="../Images/carte_presse.png")
+    }
+};
+
+class Mégaphone extends Booster {
+    constructor () {
+        super(nom="Mégaphone", popularite_bonus=5, image="../Images/megaphone.png")
+    }
+};
+
+class MicroTele extends Booster {
+    constructor () {
+        super(nom="Interview France TV", popularite_bonus=8, image="../Images/micro_france_tv.png")
+    }
 };
